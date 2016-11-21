@@ -18,6 +18,17 @@ GrayCodes::GrayCodes(int length) {
 }
 
 
+GrayCodes & GrayCodes::operator=(const GrayCodes & gc) {
+
+  assert(this->length == gc.length);
+
+  this->s = gc.s;
+  this->c = gc.c;
+  this->i = gc.i;
+  this->changed_bit = gc.changed_bit;
+}
+
+
 bool GrayCodes::has_next() {
 	return i < length;
 }

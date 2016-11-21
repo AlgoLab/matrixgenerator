@@ -13,6 +13,11 @@ class GrayCodes {
 
 		GrayCodes(int length);
 
+		/** effectivly, set state of Gray code to that of
+		  * another Gray code
+		  */
+		GrayCodes & operator=(const GrayCodes & gc);
+
 		bool has_next();
 
 		/** Return the next Gray code.
