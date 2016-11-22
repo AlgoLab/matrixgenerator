@@ -100,6 +100,62 @@ bool MatrixGenerator::is_valid() {
 
   // apply the tests, e.g.,
   // valid = valid and has_some_property();
+  valid = valid and no_zero();
+  valid = valid and no_one();
+  valid = valid and no_duplicate();
 
   return valid;
+}
+
+
+// the tests for validity
+/**********************************************************************/
+
+bool MatrixGenerator::no_zero() {
+
+  for(int j=0; j < m_; ++j)
+    if(columns_[j] == 0) {
+      //cout << "zero j : " << j << endl;
+      return false;
+    }
+
+  return true;
+}
+
+
+bool MatrixGenerator::no_one() {
+
+  MatrixGenerator::int_t mask;
+  for(int j=0; j < m_; ++j) {
+
+    mask = 1;
+    int count = 0;
+    for(int i=0; i < n_; ++i) {
+
+      if(columns_[j] & mask)
+	++count;
+
+      mask <<= 1;
+    }
+
+    if(count == 1) {
+      //cout << "one j : " << j << endl;
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+bool MatrixGenerator::no_duplicate() {
+
+  for(int i=0; i < m_; ++i)
+    for(int j=0; j < i; ++j)
+      if(columns_[i] == columns_[j]) {
+	//cout << "duplicate i,j : " << i << "," << j << endl;
+	return false;
+      }
+
+  return true;
 }

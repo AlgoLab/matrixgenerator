@@ -60,6 +60,15 @@ class MatrixGenerator {
   // what it means for the current matrix to be valid
   bool is_valid();
 
+  /* the tests for validity -- current matrix has:
+   *   (a) no zero column,
+   *   (b) no column with exactly one 1 and
+   *   (c) no pair of identical columns
+   */
+  bool no_zero(); // (a)
+  bool no_one(); // (b)
+  bool no_duplicate(); // (c)
+
 };
 
 #endif
