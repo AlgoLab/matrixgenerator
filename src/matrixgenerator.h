@@ -29,6 +29,7 @@ class MatrixGenerator {
 
   std::vector<GrayCodes *> generator_;
   std::vector<int_t> current_;
+  std::vector<int_t> columns_; // column representation of current_
 
   bool has_next_; // generator has another matrix
 
