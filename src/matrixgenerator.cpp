@@ -9,7 +9,11 @@ MatrixGenerator::MatrixGenerator(int n, int m) :
     generator_[i] = new GrayCodes(m_);
 
   generator_[n_-1]->get_next(); // no all-zeros row
-  has_next_ = cascade(n_-1);
+  has_next_ = cascade(n_-1); // strictly decreasing
+
+  // if initial matrix is not valid
+  if(has_next_ and !is_valid())
+    has_next_ = get_next_valid();
 }
 
 
@@ -17,13 +21,7 @@ vector<MatrixGenerator::int_t> MatrixGenerator::get_next() {
 
   vector<MatrixGenerator::int_t> next = current_;
 
-  // now try to get the next next one, updating has_next_ accordingly
-  for(int i=0; i< n_; ++i) {
-
-    has_next_ = cascade(i);
-    if(has_next_) // don't search any further
-      break;
-  }
+  has_next_ = get_next_valid(); // now try to get the next valid one
 
   return next;
 }
@@ -31,6 +29,29 @@ vector<MatrixGenerator::int_t> MatrixGenerator::get_next() {
 
 // auxiliary (private) functions
 /**********************************************************************/
+
+bool MatrixGenerator::get_next_valid() {
+
+  while(get_next_potential()) {
+    //cout << "columns : "; for(int i=0;i<m_;++i) { cout << columns_[i] << " "; }
+    //cout << endl;
+
+    if(is_valid())
+      return true;
+  }
+  return false;
+}
+
+
+bool MatrixGenerator::get_next_potential() {
+
+  for(int i=0; i < n_; ++i)
+    if(cascade(i))
+      return true;
+
+  return false;
+}
+
 
 bool MatrixGenerator::cascade(int pos) {
 
@@ -69,5 +90,16 @@ bool MatrixGenerator::cascade(int pos) {
     }
   }
 
+  // return
   return true;
+}
+
+
+bool MatrixGenerator::is_valid() {
+  bool valid = true;
+
+  // apply the tests, e.g.,
+  // valid = valid and has_some_property();
+
+  return valid;
 }

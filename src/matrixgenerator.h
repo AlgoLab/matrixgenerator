@@ -33,11 +33,32 @@ class MatrixGenerator {
 
   bool has_next_; // generator has another matrix
 
+
+  // auxiliary (private) functions
+  /**********************************************************************/
+
+ private :
+
+  /* move current matrix forward to the next valid matrix (by looping
+   * through potentials), returning false should no such matrix exist
+   */
+  bool get_next_valid();
+
+  /* move the current matrix forward to the next potential matrix (one
+   * that can only be invalid), returning false should no such matrix
+   * exist
+   */
+  bool get_next_potential();
+
   /* attempt to increment row pos by 1, and then cascade backwards
    * from pos, to ensure that rows are strictly decreasing to pos.
-   * Return false if this is not possible
+   * Return false if this is not possible.  Update columns_ upon
+   * success.
    */
   bool cascade(int pos);
+
+  // what it means for the current matrix to be valid
+  bool is_valid();
 
 };
 
