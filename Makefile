@@ -1,7 +1,8 @@
 # compile the generator
 #
 cc = g++
-objs = src/matrix_generator.o src/matrixgenerator.o src/graycodes.o
+objs = src/matrix_generator.o src/matrixgenerator.o \
+	src/graycodes.o src/connected.o
 
 matrix_generator : $(objs)  
 	$(cc) $^ -o $@

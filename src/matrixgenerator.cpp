@@ -103,6 +103,7 @@ bool MatrixGenerator::is_valid() {
   valid = valid and no_zero();
   valid = valid and no_one();
   valid = valid and no_duplicate();
+  valid = valid and is_connected();
 
   return valid;
 }
@@ -158,4 +159,13 @@ bool MatrixGenerator::no_duplicate() {
       }
 
   return true;
+}
+
+
+bool MatrixGenerator::is_connected() {
+
+  Connected conn(current_, columns_);
+
+  //if(!conn.is_connected()) { cout << "not connected" << endl; }
+  return conn.is_connected();
 }

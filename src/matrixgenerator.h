@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "graycodes.h"
+#include "connected.h"
 
 /* A class to generate all nxm binary matrices in a smart way.  Based
  * for the most part on Gray codes.
@@ -64,10 +65,12 @@ class MatrixGenerator {
    *   (a) no zero column,
    *   (b) no column with exactly one 1 and
    *   (c) no pair of identical columns
+   *   (d) a single connected component (i.e., is connected)
    */
   bool no_zero(); // (a)
   bool no_one(); // (b)
   bool no_duplicate(); // (c)
+  bool is_connected(); // (d)
 
 };
 
